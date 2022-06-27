@@ -11,6 +11,8 @@ class Alerts(db.Model):
     #Alerts_image = 
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    lat = db.Column(db.Float)
+    long = db.Column(db.Float)
     
 
 class User(db.Model, UserMixin):

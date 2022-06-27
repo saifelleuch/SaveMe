@@ -1,2 +1,83 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
-{% block content %}<h1>This is the home page</h1>{% endblock %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h2>Alert's Map</h2>
+<div id="map" style="width: 600px; height: 400px"></div>
+<script type="text/javascript">
+
+
+
+    // Initialize and add the map
+  function initMap() {
+    {% if alerts is defined and alerts|length > 0 %}
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: { lat: {{ alerts[0].lat }}, lng: {{ alerts[0].long }} },
+      });
+    
+    var infowindow = new google.maps.InfoWindow();
+    
+      
+
+    {% for one_alert in alerts %}
+      
+      var marker = new google.maps.Marker({
+        position: { lat: {{ one_alert.lat }}, lng: {{ one_alert.long }} },
+        map: map,
+      });
+      
+      google.maps.event.addListener(marker,'click', (function(){ 
+    return function() {
+        infowindow.setContent("{{ one_alert.Alerts_text }}");
+        infowindow.open(map,marker);
+        console.log("{{ one_alert.Alerts_text }}");
+    };
+})()); 
+
+    {% endfor %}
+    {% else %}
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: { lat: 36.850827, lng: 10.260925 },
+      });
+      {% endif %}
+
+    map.addListener("click", (mapsMouseEvent) => {
+      
+      $("#myModal").show();
+      $("#lat").val(mapsMouseEvent.latLng.lat);
+      $("#long").val(mapsMouseEvent.latLng.lng);
+    });
+  }
+
+  window.initMap = initMap;
+  
+</script>
+
+<div id="myModal" class="modal">
+  <!-- add alert -->
+  <div class="modal-content">
+    <span class="close" id="closeModql">&times;</span>
+    <p>Add Alert.</p>
+    <form class="home-form" method="POST" id="homeformid">
+      <label for="description">Describe the situation</label>
+      <br />
+      <input type="text" placeholder="Put a description" name="desc" />
+      <br />
+      <label for="description">Latitude</label>
+      <br />
+      <input type="text" placeholder="Put the Latitude" name="lat" id="lat"/>
+      <br />
+      <label for="description">Longitude</label>
+      <br />
+      <input type="text" placeholder="Put the longitude" name="long" id="long"/>
+      <br />
+      <label for="description">Put a photo of the animal</label>
+      <br />
+      <input type="file" accept="image/*" />
+      <br />
+      <button type="submit" class="btn btn-primary">Submit alert</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
