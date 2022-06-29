@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaveMe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+    <section class="sec">
+        <header>
+            <h2> <a href="/" class="logo">SaveMe</a></h2>
+            <div class="navigation">
+                <a href="/sign-up" >Sign Up</a>
+                <a href="/login" >Login</a>
+            </div>
+        </header>
+        <div class="content">
+            <div class="info">
+                <h2>All animals in need <br><span>in one map</span></h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos dolorum, officiis aliquam quam obcaecati aliquid molestiae laborum expedita cumque nesciunt animi odit quae consequuntur inventore quas? In ratione reiciendis veritatis?</p>
+                <a href="/login" class="info-btn">More info</a>
+            </div>
+        </div>
+    </section>
+    <section class="sec2">
+        <header>
+            <h1 class="feature"> Features </h1>
+        </header>
+        <div class="row">
+            <div class="col_33">
+                <div class="feature_container">
+                    <div class="feature_image">
+                        <img src="{{ url_for('static',filename='signup.png') }}" alt="">
+                    </div>
+                    <div class="feature_desc">
+                        <h3>CREATE ACCOUNT</h3>
+                        <p>User should create an account to see the alert's map</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col_33">
+                <div class="feature_container">
+                    <div class="feature_image">
+                        <img src="{{ url_for('static',filename='addalert.png') }}" alt="">
+                    </div>
+                    <div class="feature_desc">
+                        <h3>ADD ALERT</h3>
+                        <p>User can add an alert when he find an animal in need</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col_33">
+                <div class="feature_container">
+                    <div class="feature_image">
+                        <img src="{{ url_for('static',filename='openalert.png') }}" alt="">
+                    </div>
+                    <div class="feature_desc">
+                        <h3>FIND ANIMAL</h3>
+                        <p>User can open any alert to help an animal in need</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="sec3">
+        <header>
+            <h1 class="about"> About </h1>
+        </header>
+        <div class="row2">
+            <div class="col_50">
+                <div>
+                <h2 class="inspired">What Inspired the Project
+                </h2>
+                <div class="txt">
+                <p>When I was a kid, I was an animal lover, and one day I was walking down the street and I saw a cat with a serious injury, I wanted to help him but I couldn’t because I was small and I couldn’t find anyone to ask him to help this poor cat then he died in front of my eyes at that time-there I was very sad and I wondered how many animals there are in this situation all over the world so I told myself when I grow up I will try to do something that can help these animals </p> <br> <p> Now that I had the opportunity to make an application web as a Portfolio Project for <a href="https://www.holbertonschool.com/"> Holberton School</a> I chose to make a site that allows people who find animals that need help to put an alert on the map with location, photo and description of the situation for someone to help them.
+                </p>
+                </div>
+                <br>
+                <a href="https://github.com/saifelleuch/SaveMe" class="see">See code on github</a>
+                </div>
+            </div>
+        </div>
+            <div class="row2">
+            <div class="col_50">
+                <div class="container_team">
+                <img class="myphoto"  src="{{ url_for('static',filename='saif.jpeg') }}" alt="">
+                <div class="txt">
+                <h3>Saif Eddine ELLEUCH</h3>
+                <p>Full stack developer</p>
+                </div>
+                <div class="media-icons">
+                    <a href="https://github.com/saifelleuch/"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://twitter.com/SaifLch"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/saifelleuch/"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>   
+</body>
+</html>
