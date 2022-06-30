@@ -8,13 +8,45 @@
 
     // Initialize and add the map
   function initMap() {
+    var myzoom = 5;
     {% if alerts is defined and alerts|length > 0 %}
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 5,
+        zoom: myzoom,
         center: { lat: {{ alerts[0].lat }}, lng: {{ alerts[0].long }} },
       });
     
     var infowindow = new google.maps.InfoWindow();
+
+    infoWindowLoc = new google.maps.InfoWindow();
+    const locationButton = document.createElement("button");
+    locationButton.textContent = "Pan to Current Location";
+    locationButton.classList.add("custom-map-control-button");
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindowLoc.setPosition(pos);
+          infoWindowLoc.setContent("Location found.");
+          infoWindowLoc.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindowLoc, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindowLoc, map.getCenter());
+    }
+  });
+
     
       
 
@@ -31,6 +63,7 @@
         infowindow.open(map,marker);
         console.log("{{ one_alert.Alerts_text }}");
     };
+    
 })()); 
 
     {% endfor %}
@@ -47,6 +80,8 @@
       $("#lat").val(mapsMouseEvent.latLng.lat);
       $("#long").val(mapsMouseEvent.latLng.lng);
     });
+
+    
   }
 
   window.initMap = initMap;
